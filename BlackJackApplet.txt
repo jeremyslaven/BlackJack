@@ -1,0 +1,4483 @@
+package NicolClicker;
+import java.applet.Applet;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.util.Random;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
+import java.math.*;
+/*
+Jeremy Slaven
+May 24, 2017
+Block B
+
+It took me forever, but this is the game of black jack against a computer
+
+First one to five points win
+
+randomCards 3 and 4 are the "hit" cards for the user
+randomCards 5 and 6 are the "hit" cards for the computer
+randomCard 7 is the dealer's face down card
+randomCard 8 is the dealer's face up card
+ */
+public class Help extends JoeApplet implements KeyListener, MouseMotionListener, MouseListener
+{
+	//Create the variables and generator
+	Random generator = new Random();
+	int newbotCardValue;
+	int firstbotCardValue;
+	int userPoints;
+	int dealerPoints;
+	int timer = 0;
+	int buttonValue = 0;
+	int randomSuit1;
+	int randomCard1;
+	int randomSuit2;
+	int randomCard2;
+	int randomSuit3;
+	int randomCard3;
+	int randomCard4;
+	int randomSuit4;
+	int randomSuit5;
+	int randomCard5;
+	int randomCard6;
+	int randomSuit6;
+	int randomCard7;
+	int randomSuit7;
+	int randomSuit8;
+	int randomCard8;
+	int cardValue1 = 0;
+	int cardValue2 = 0;
+	int cardValue3 = 0;
+	int cardValue4 = 0;
+	int cardValue5 = 0;
+	int cardValue6 = 0;
+	int cardValue7 = 0;
+	int cardValue8 = 0;
+	int userCardValue;
+	int botCardValue;
+	int userRoundPoints = 0;
+	int botRoundPoints = 0;
+	int botCardValue5;
+	int botCardValue6;
+	int totalBotCardValue;
+	int almostBotCardValue;
+	boolean cardValueUsers = false;
+	boolean stay = false;
+	boolean position1 = true;
+	boolean position2 = true;
+	boolean position3 = false;
+	boolean position4 = false;
+	boolean position5 = false;
+	boolean position6 = false;
+	boolean position7 = false;
+	boolean position8 = true;
+	boolean AceOfHearts = false;
+	boolean TwoOfHearts = false;
+	boolean ThreeOfHearts = false;
+	boolean FourOfHearts = false;
+	boolean FiveOfHearts = false;
+	boolean SixOfHearts = false;
+	boolean SevenOfHearts = false;
+	boolean EightOfHearts = false;
+	boolean NineOfHearts = false;
+	boolean TenOfHearts = false;
+	boolean JackOfHearts = false;
+	boolean QueenOfHearts = false;
+	boolean KingOfHearts = false;
+	boolean AceOfDiamonds = false;
+	boolean TwoOfDiamonds = false;
+	boolean ThreeOfDiamonds = false;
+	boolean FourOfDiamonds = false;
+	boolean FiveOfDiamonds = false;
+	boolean SixOfDiamonds = false;
+	boolean SevenOfDiamonds = false;
+	boolean EightOfDiamonds = false;
+	boolean NineOfDiamonds = false;
+	boolean TenOfDiamonds = false;
+	boolean JackOfDiamonds = false;
+	boolean QueenOfDiamonds = false;
+	boolean KingOfDiamonds = false;
+	boolean AceOfClubs = false;
+	boolean TwoOfClubs = false;
+	boolean ThreeOfClubs = false;
+	boolean FourOfClubs = false;
+	boolean FiveOfClubs = false;
+	boolean SixOfClubs = false;
+	boolean SevenOfClubs = false;
+	boolean EightOfClubs = false;
+	boolean NineOfClubs = false;
+	boolean TenOfClubs = false;
+	boolean JackOfClubs = false;
+	boolean QueenOfClubs = false;
+	boolean KingOfClubs = false;
+	boolean AceOfSpades = false;
+	boolean TwoOfSpades = false;
+	boolean ThreeOfSpades = false;
+	boolean FourOfSpades = false;
+	boolean FiveOfSpades = false;
+	boolean SixOfSpades = false;
+	boolean SevenOfSpades = false;
+	boolean EightOfSpades = false;
+	boolean NineOfSpades = false;
+	boolean TenOfSpades = false;
+	boolean JackOfSpades = false;
+	boolean QueenOfSpades = false;
+	boolean KingOfSpades = false;
+	boolean showstartscreen = true;
+	boolean playgame = false;
+	boolean showendscreen = false;
+	boolean ace11 = false;
+	boolean userWin = false;
+	boolean dealerWin = false;
+	boolean tie = false;
+	boolean back = true;
+	boolean firstStay = true;
+	boolean dealerHit = true;
+	boolean playAgain = false;
+	boolean replayGame = false;
+	boolean playGame = false;
+	boolean hit = false;
+	Image aceOfHearts;
+	Image twoOfHearts;
+	Image threeOfHearts;
+	Image fourOfHearts;
+	Image fiveOfHearts;
+	Image sixOfHearts;
+	Image sevenOfHearts;
+	Image eightOfHearts;
+	Image nineOfHearts;
+	Image tenOfHearts;
+	Image jackOfHearts;
+	Image queenOfHearts;
+	Image kingOfHearts;
+	Image aceOfDiamonds;
+	Image twoOfDiamonds;
+	Image threeOfDiamonds;
+	Image fourOfDiamonds;
+	Image fiveOfDiamonds;
+	Image sixOfDiamonds;
+	Image sevenOfDiamonds;
+	Image eightOfDiamonds;
+	Image nineOfDiamonds;
+	Image tenOfDiamonds;
+	Image jackOfDiamonds;
+	Image queenOfDiamonds;
+	Image kingOfDiamonds;
+	Image aceOfClubs;
+	Image twoOfClubs;
+	Image threeOfClubs;
+	Image fourOfClubs;
+	Image fiveOfClubs;
+	Image sixOfClubs;
+	Image sevenOfClubs;
+	Image eightOfClubs;
+	Image nineOfClubs;
+	Image tenOfClubs;
+	Image jackOfClubs;
+	Image queenOfClubs;
+	Image kingOfClubs;
+	Image aceOfSpades;
+	Image twoOfSpades;
+	Image threeOfSpades;
+	Image fourOfSpades;
+	Image fiveOfSpades;
+	Image sixOfSpades;
+	Image sevenOfSpades;
+	Image eightOfSpades;
+	Image nineOfSpades;
+	Image tenOfSpades;
+	Image jackOfSpades;
+	Image queenOfSpades;
+	Image kingOfSpades;
+	Image backOfCard;
+	Font winner = new Font("", 100,100);
+
+	//this is the method that actually shows the graphics
+	public void paint(Graphics art)
+	{
+		if(showstartscreen)
+		{
+			//draws the start screen
+			setSize(700,700);
+			drawstartscreen(art);
+			Color feltGreen = new Color(39, 119, 20);
+			setBackground(feltGreen);
+		}
+		else
+		{
+			setSize(700,700);
+			if(playGame)
+			{
+				//draws the actual game and allows the user to play 
+				Color feltGreen = new Color(39, 119, 20);
+				setBackground(feltGreen);
+				art.setColor(Color.white);
+				art.drawRect(500, 480, 125, 175);
+				art.drawRect(50, 480, 125, 175);
+				art.drawRect(50, 20, 125, 175);
+				art.drawRect(500, 20, 125, 175);
+				randomSuitandCard1(art);
+				randomSuitandCard2(art);
+				randomSuitandCard8(art);
+				randomSuitandCard4(art);
+				randomSuitandCard3(art);
+				randomSuitandCard5(art);
+				randomSuitandCard6(art);
+				randomSuitandCard7(art);
+				backCard(art);
+				cardValueUsers(art);
+				art.setColor(Color.yellow);
+				art.drawRect(100, 300, 100, 50);
+				art.drawRect(400, 300, 100, 50);
+				art.drawString("HIT", 140, 330);
+				art.drawString("STAY", 435, 330);
+				art.drawString("User Score: " +userRoundPoints, 140, 290);
+				art.drawString("Dealer Score: " +botRoundPoints, 435, 290);
+				art.drawString("Card Value: " +userCardValue, 140, 440);
+				userCardValue = cardValue1 + cardValue2 + cardValue3 + cardValue4;
+				firstbotCardValue = botCardValue + cardValue5;
+				botWinner(art);
+				userWinner(art);
+			}
+			else
+			{
+				//if the user gets 5 points, the end screen shows saying "you win" and asks if the user wants to play again
+				if(userRoundPoints == 5)
+				{
+				Color feltGreen = new Color(39, 119, 20);
+				setBackground(feltGreen);
+				art.setColor(Color.white);
+				art.drawString("YOU WIN :)", 300, 350);
+				art.drawString("Click the button below to play again", 280, 380);
+				art.setColor(Color.white);
+				art.fillRect(260, 480, 150, 50);
+				art.drawRect(260, 480, 150, 50);
+				art.setColor(Color.blue);
+				art.drawString("PLAY AGAIN", 315, 510);
+				}
+				else
+				{
+					//if the dealer gets 5 points, the end screen shows saying "you lose" and asks if the user wants to play again
+					Color feltGreen = new Color(39, 119, 20);
+					setBackground(feltGreen);
+					art.setColor(Color.white);
+					art.drawString("YOU LOSE :)", 300, 350);
+					art.drawString("Click the button below to play again", 280, 380);
+					art.setColor(Color.white);
+					art.fillRect(290, 480, 150, 50);
+					art.drawRect(290, 480, 150, 50);
+					art.setColor(Color.blue);
+					art.drawString("PLAY AGAIN", 325, 510);
+				}
+			}
+				
+
+
+			}//reset(art);
+		}
+	public void playNew(Graphics art)
+	{
+		
+	}
+	//this method starts the end screen if the user wins
+	public void botWinner(Graphics art)
+	{
+		if(userRoundPoints == 5)
+		{
+			playAgain = true;
+			playGame = false;
+		}
+	}
+	//this method starts the end screen if the dealer wins
+	public void userWinner(Graphics art)
+	{
+		if(botRoundPoints == 5)
+		{
+			playAgain = true;
+			playGame = false;
+		}
+	}
+	//while the dealer's or user's score is less than five, the game will keep restarting until someone wins
+	public void playAgain(Graphics art)
+	{
+		while(botRoundPoints < 5 || userRoundPoints < 5)
+		{
+			reset(art);
+		}
+	}
+	public void randomSuitandCard1(Graphics art) //this generates a random suit and card to be drawn in the first position
+	{
+		//generator to pick suit
+		if(position1)
+		{
+			randomSuit1 = generator.nextInt(4) + 1;
+			randomCard1 = generator.nextInt(13) + 1;
+			position1 = false;
+		}
+		//1 = hearts 2 = diamonds 3 = clubs 4 = spades
+		if(randomSuit1 == 1)
+		{
+			if(randomCard1 == 1)
+			{
+				art.drawString("Press Q to make the value 11 or press nothing to make the value 1", 140, 400);
+				cardValue1 = 1;
+				if(ace11)
+				{
+					cardValue1 = 11;
+				}
+				art.drawImage(aceOfHearts, 200, 480, 125, 175, this);
+			}
+			else
+			{
+				if(randomCard1 == 2)
+				{
+					cardValue1 = 2;
+					art.drawImage(twoOfHearts, 200, 480, 125, 175, this);
+				}
+				else
+				{
+					if(randomCard1 == 3)
+					{
+						cardValue1 = 3;
+						art.drawImage(threeOfHearts, 200, 480, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard1 == 4)
+						{
+							cardValue1 = 4;
+							art.drawImage(fourOfHearts, 200, 480, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard1 == 5)
+							{
+								cardValue1 = 5;
+								art.drawImage(fiveOfHearts, 200, 480, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard1 == 6)
+								{
+									cardValue1 = 6;
+									art.drawImage(sixOfHearts, 200, 480, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard1 == 7)
+									{
+										cardValue1 = 7;
+										art.drawImage(sevenOfHearts, 200, 480, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard1 == 8)
+										{
+											cardValue1 = 8;
+											art.drawImage(eightOfHearts, 200, 480, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard1 == 9)
+											{	
+												cardValue1 = 9;
+												art.drawImage(nineOfHearts, 200, 480, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard1 == 10)
+												{
+													cardValue1 = 10;
+													art.drawImage(tenOfHearts, 200, 480, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard1 == 11)
+													{
+														cardValue1 = 10;
+														art.drawImage(jackOfHearts, 200, 480, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard1 == 12)
+														{
+															cardValue1 = 10;
+															art.drawImage(queenOfHearts, 200, 480, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard1 == 13)
+															{
+																cardValue1 = 10;
+																art.drawImage(kingOfHearts, 200, 480, 125, 175, this);
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			if(randomSuit1 == 2)
+			{
+				if(randomCard1 == 1)
+				{
+					art.drawString("Press Q to make the value 11 or press nothing to make the value 1", 140, 400);
+					cardValue1 = 1;
+					if(ace11)
+					{
+						cardValue1 = 11;
+					}
+					art.drawImage(aceOfDiamonds, 200, 480, 125, 175, this);
+				}
+				else
+				{
+					if(randomCard1 == 2)
+					{
+						cardValue1 = 2;
+						art.drawImage(twoOfDiamonds, 200, 480, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard1 == 3)
+						{
+							cardValue1 = 3;
+							art.drawImage(threeOfDiamonds, 200, 480, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard1 == 4)
+							{
+								cardValue1 = 4;
+								art.drawImage(fourOfDiamonds, 200, 480, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard1 == 5)
+								{
+									cardValue1 = 5;
+									art.drawImage(fiveOfDiamonds, 200, 480, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard1 == 6)
+									{
+										cardValue1 = 6;
+										art.drawImage(sixOfDiamonds, 200, 480, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard1 == 7)
+										{
+											cardValue1 = 7;
+											art.drawImage(sevenOfDiamonds, 200, 480, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard1 == 8)
+											{
+												cardValue1 = 8;
+												art.drawImage(eightOfDiamonds, 200, 480, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard1 == 9)
+												{	
+													cardValue1 = 9;
+													art.drawImage(nineOfDiamonds, 200, 480, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard1 == 10)
+													{
+														cardValue1 = 10;
+														art.drawImage(tenOfDiamonds, 200, 480, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard1 == 11)
+														{
+															cardValue1 = 10;
+															art.drawImage(jackOfDiamonds, 200, 480, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard1 == 12)
+															{
+																cardValue1 = 10;
+																art.drawImage(queenOfDiamonds, 200, 480, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard1 == 13)
+																{
+																	cardValue1 = 10;
+																	art.drawImage(kingOfDiamonds, 200, 480, 125, 175, this);
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				if(randomSuit1 == 3)
+				{
+
+					if(randomCard1 == 1)
+					{
+						art.drawString("Press Q to make the value 11 or press nothing to make the value 1", 140, 400);
+						cardValue1 = 1;
+						if(ace11)
+						{
+							cardValue1 = 11;
+						}
+						art.drawImage(aceOfClubs, 200, 480, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard1 == 2)
+						{
+							cardValue1 = 2;
+							art.drawImage(twoOfClubs, 200, 480, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard1 == 3)
+							{
+								cardValue1 = 3;
+								art.drawImage(threeOfClubs, 200, 480, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard1 == 4)
+								{
+									cardValue1 = 4;
+									art.drawImage(fourOfClubs, 200, 480, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard1 == 5)
+									{
+										cardValue1 = 5;
+										art.drawImage(fiveOfClubs, 200, 480, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard1 == 6)
+										{
+											cardValue1 = 6;
+											art.drawImage(sixOfClubs, 200, 480, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard1 == 7)
+											{
+												cardValue1 = 7;
+												art.drawImage(sevenOfClubs, 200, 480, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard1 == 8)
+												{
+													cardValue1 = 8;
+													art.drawImage(eightOfClubs, 200, 480, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard1 == 9)
+													{	
+														cardValue1 = 9;
+														art.drawImage(nineOfClubs, 200, 480, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard1 == 10)
+														{
+															cardValue1 = 10;
+															art.drawImage(tenOfClubs, 200, 480, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard1 == 11)
+															{
+																cardValue1 = 10;
+																art.drawImage(jackOfClubs, 200, 480, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard1 == 12)
+																{
+																	cardValue1 = 10;
+																	art.drawImage(queenOfClubs, 200, 480, 125, 175, this);
+																}
+																else
+																{
+																	if(randomCard1 == 13)
+																	{
+																		cardValue1 = 10;
+																		art.drawImage(kingOfClubs, 200, 480, 125, 175, this);
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+				}
+				else
+				{
+					if(randomSuit1 == 4)
+					{
+
+						if(randomCard1 == 1)
+						{
+							art.drawString("Press Q to make the value 11 or press nothing to make the value 1", 140, 400);
+							cardValue1 = 1;
+							if(ace11)
+							{
+								cardValue1 = 11;
+							}
+							art.drawImage(aceOfSpades, 200, 480, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard1 == 2)
+							{
+								cardValue1 = 2;
+								art.drawImage(twoOfSpades, 200, 480, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard1 == 3)
+								{
+									cardValue1 = 3;
+									art.drawImage(threeOfSpades, 200, 480, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard1 == 4)
+									{
+										cardValue1 = 4;
+										art.drawImage(fourOfSpades, 200, 480, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard1 == 5)
+										{
+											cardValue1 = 5;
+											art.drawImage(fiveOfSpades, 200, 480, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard1 == 6)
+											{
+												cardValue1 = 6;
+												art.drawImage(sixOfSpades, 200, 480, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard1 == 7)
+												{
+													cardValue1 = 7;
+													art.drawImage(sevenOfSpades, 200, 480, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard1 == 8)
+													{
+														cardValue1 = 8;
+														art.drawImage(eightOfSpades, 200, 480, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard1 == 9)
+														{	
+															cardValue1 = 9;
+															art.drawImage(nineOfSpades, 200, 480, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard1 == 10)
+															{
+																cardValue1 = 10;
+																art.drawImage(tenOfSpades, 200, 480, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard1 == 11)
+																{
+																	cardValue1 = 10;
+																	art.drawImage(jackOfSpades, 200, 480, 125, 175, this);
+																}
+																else
+																{
+																	if(randomCard1 == 12)
+																	{
+																		cardValue1 = 10;
+																		art.drawImage(queenOfSpades, 200, 480, 125, 175, this);
+																	}
+																	else
+																	{
+																		if(randomCard1 == 13)
+																		{
+																			cardValue1 = 10;
+																			art.drawImage(kingOfSpades, 200, 480, 125, 175, this);
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+
+									}
+								}
+							}
+						}
+
+					}
+				}
+			}
+		}
+	}
+	public void randomSuitandCard2(Graphics art) //this generates a random suit and card to be drawn in the second position
+	{
+
+		//generator to pick suit
+		if(position2)
+		{
+			randomSuit2 = generator.nextInt(4) + 1;
+			randomCard2 = generator.nextInt(13) + 1;
+			position2 = false;
+		}
+		//1 = hearts 2 = diamonds 3 = clubs 4 = spades
+		if(randomSuit2 == 1)
+		{
+			if(randomCard2 == 1)
+			{
+				art.drawString("Press Q to make the value 11 or press nothing to make the value 1", 140, 400);
+				cardValue2 = 1;
+				if(ace11)
+				{
+					cardValue2 = 11;
+				}
+				art.drawImage(aceOfHearts, 350, 480, 125, 175, this);
+			}
+			else
+			{
+				if(randomCard2 == 2)
+				{
+					cardValue2 = 2;
+					art.drawImage(twoOfHearts, 350, 480, 125, 175, this);
+				}
+				else
+				{
+					if(randomCard2 == 3)
+					{
+						cardValue2 = 3;
+						art.drawImage(threeOfHearts, 350, 480, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard2 == 4)
+						{
+							cardValue2 = 4;
+							art.drawImage(fourOfHearts, 350, 480, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard2 == 5)
+							{
+								cardValue2 = 5;
+								art.drawImage(fiveOfHearts, 350, 480, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard2 == 6)
+								{
+									cardValue2 = 6;
+									art.drawImage(sixOfHearts, 350, 480, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard2 == 7)
+									{
+										cardValue2 = 7;
+										art.drawImage(sevenOfHearts, 350, 480, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard2 == 8)
+										{
+											cardValue2 = 8;
+											art.drawImage(eightOfHearts, 350, 480, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard2 == 9)
+											{	
+												cardValue2 = 9;
+												art.drawImage(nineOfHearts, 350, 480, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard2 == 10)
+												{
+													cardValue2 = 10;
+													art.drawImage(tenOfHearts, 350, 480, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard2 == 11)
+													{
+														cardValue2 = 10;
+														art.drawImage(jackOfHearts, 350, 480, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard2 == 12)
+														{
+															cardValue2 = 10;
+															art.drawImage(queenOfHearts, 350, 480, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard2 == 13)
+															{
+																cardValue2 = 10;
+																art.drawImage(kingOfHearts, 350, 480, 125, 175, this);
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			if(randomSuit2 == 2)
+			{
+				if(randomCard2 == 1)
+				{
+					art.drawString("Press Q to make the value 11 or press nothing to make the value 1", 140, 400);
+					cardValue2 = 1;
+					if(ace11)
+					{
+						cardValue2 = 11;
+					}
+					art.drawImage(aceOfDiamonds, 350, 480, 125, 175, this);
+				}
+				else
+				{
+					if(randomCard2 == 2)
+					{
+						cardValue2 = 2;
+						art.drawImage(twoOfDiamonds, 350, 480, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard2 == 3)
+						{
+							cardValue2 = 3;
+							art.drawImage(threeOfDiamonds, 350, 480, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard2 == 4)
+							{
+								cardValue2 = 4;
+								art.drawImage(fourOfDiamonds, 350, 480, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard2 == 5)
+								{
+									cardValue2 = 5;
+									art.drawImage(fiveOfDiamonds, 350, 480, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard2 == 6)
+									{
+										cardValue2 = 6;
+										art.drawImage(sixOfDiamonds, 350, 480, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard2 == 7)
+										{
+											cardValue2 = 7;
+											art.drawImage(sevenOfDiamonds, 350, 480, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard2 == 8)
+											{
+												cardValue2 = 8;
+												art.drawImage(eightOfDiamonds, 350, 480, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard2 == 9)
+												{	
+													cardValue2 = 9;
+													art.drawImage(nineOfDiamonds, 350, 480, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard2 == 10)
+													{
+														cardValue2 = 10;
+														art.drawImage(tenOfDiamonds, 350, 480, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard2 == 11)
+														{
+															cardValue2 = 10;
+															art.drawImage(jackOfDiamonds, 350, 480, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard2 == 12)
+															{
+																cardValue2 = 10;
+																art.drawImage(queenOfDiamonds, 350, 480, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard2 == 13)
+																{
+																	cardValue2 = 10;
+																	art.drawImage(kingOfDiamonds, 350, 480, 125, 175, this);
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				if(randomSuit2 == 3)
+				{
+
+					if(randomCard2 == 1)
+					{
+						art.drawString("Press Q to make the value 11 or press nothing to make the value 1", 140, 400);
+						cardValue2 = 1;
+						if(ace11)
+						{
+							cardValue2 = 11;
+						}
+						art.drawImage(aceOfClubs, 350, 480, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard2 == 2)
+						{
+							cardValue2 = 2;
+							art.drawImage(twoOfClubs, 350, 480, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard2 == 3)
+							{
+								cardValue2 = 3;
+								art.drawImage(threeOfClubs, 350, 480, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard2 == 4)
+								{
+									cardValue2 = 4;
+									art.drawImage(fourOfClubs, 350, 480, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard2 == 5)
+									{
+										cardValue2 = 5;
+										art.drawImage(fiveOfClubs, 350, 480, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard2 == 6)
+										{
+											cardValue2 = 6;
+											art.drawImage(sixOfClubs, 350, 480, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard2 == 7)
+											{
+												cardValue2 = 7;
+												art.drawImage(sevenOfClubs, 350, 480, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard2 == 8)
+												{
+													cardValue2 = 8;
+													art.drawImage(eightOfClubs, 350, 480, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard2 == 9)
+													{	
+														cardValue2 = 9;
+														art.drawImage(nineOfClubs, 350, 480, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard2 == 10)
+														{
+															cardValue2 = 10;
+															art.drawImage(tenOfClubs, 350, 480, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard2 == 11)
+															{
+																cardValue2 = 10;
+																art.drawImage(jackOfClubs, 350, 480, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard2 == 12)
+																{
+																	cardValue2 = 10;
+																	art.drawImage(queenOfClubs, 350, 480, 125, 175, this);
+																}
+																else
+																{
+																	if(randomCard2 == 13)
+																	{
+																		cardValue2 = 10;
+																		art.drawImage(kingOfClubs, 350, 480, 125, 175, this);
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+				}
+				else
+				{
+					if(randomSuit2 == 4)
+					{
+
+						if(randomCard2 == 1)
+						{
+							art.drawString("Press Q to make the value 11 or press nothing to make the value 1", 140, 400);
+							cardValue2 = 1;
+							if(ace11)
+							{
+								cardValue2 = 11;
+							}
+							art.drawImage(aceOfSpades, 350, 480, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard2 == 2)
+							{
+								cardValue2 = 2;
+								art.drawImage(twoOfSpades, 350, 480, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard2 == 3)
+								{
+									cardValue2 = 3;
+									art.drawImage(threeOfSpades, 350, 480, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard2 == 4)
+									{
+										cardValue2 = 4;
+										art.drawImage(fourOfSpades, 350, 480, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard2 == 5)
+										{
+											cardValue2 = 5;
+											art.drawImage(fiveOfSpades, 350, 480, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard2 == 6)
+											{
+												cardValue2 = 6;
+												art.drawImage(sixOfSpades, 350, 480, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard2 == 7)
+												{
+													cardValue2 = 7;
+													art.drawImage(sevenOfSpades, 350, 480, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard2 == 8)
+													{
+														cardValue2 = 8;
+														art.drawImage(eightOfSpades, 350, 480, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard2 == 9)
+														{	
+															cardValue2 = 9;
+															art.drawImage(nineOfSpades, 350, 480, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard2 == 10)
+															{
+																cardValue2 = 10;
+																art.drawImage(tenOfSpades, 350, 480, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard2 == 11)
+																{
+																	cardValue2 = 10;
+																	art.drawImage(jackOfSpades, 350, 480, 125, 175, this);
+																}
+																else
+																{
+																	if(randomCard2 == 12)
+																	{
+																		cardValue2 = 10;
+																		art.drawImage(queenOfSpades, 350, 480, 125, 175, this);
+																	}
+																	else
+																	{
+																		if(randomCard2 == 13)
+																		{
+																			cardValue2 = 10;
+																			art.drawImage(kingOfSpades, 350, 480, 125, 175, this);
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+
+					}
+				}
+			}
+		}
+	}
+	public void randomSuitandCard3(Graphics art) //this generates a random suit and card to be drawn in the third position
+	{
+		//generator to pick suit
+		if(position3)
+		{
+			randomSuit3 = generator.nextInt(4) + 1;
+			randomCard3 = generator.nextInt(13) + 1;
+			position3 = false;
+		}
+		//1 = hearts 2 = diamonds 3 = clubs 4 = spades
+		if(randomSuit3 == 1)
+		{
+			if(randomCard3 == 1)
+			{
+				art.drawString("Press Q to make the value 11 or press nothing to make the value 1", 140, 400);
+				cardValue3 = 1;
+				if(ace11)
+				{
+					cardValue3 = 11;
+				}
+				art.drawImage(aceOfHearts, 50, 480, 125, 175, this);
+			}
+			else
+			{
+				if(randomCard3 == 2)
+				{
+					cardValue3 = 2;
+					art.drawImage(twoOfHearts, 50, 480, 125, 175, this);
+				}
+				else
+				{
+					if(randomCard3 == 3)
+					{
+						cardValue3 = 3;
+						art.drawImage(threeOfHearts, 50, 480, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard3 == 4)
+						{
+							cardValue3 = 4;
+							art.drawImage(fourOfHearts, 50, 480, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard3 == 5)
+							{
+								cardValue3 = 5;
+								art.drawImage(fiveOfHearts, 50, 480, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard3 == 6)
+								{
+									cardValue3 = 6;
+									art.drawImage(sixOfHearts, 50, 480, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard3 == 7)
+									{
+										cardValue3 = 7;
+										art.drawImage(sevenOfHearts, 50, 480, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard3 == 8)
+										{
+											cardValue3 = 8;
+											art.drawImage(eightOfHearts, 50, 480, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard3 == 9)
+											{	
+												cardValue3 = 9;
+												art.drawImage(nineOfHearts, 50, 480, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard3 == 10)
+												{
+													cardValue3 = 10;
+													art.drawImage(tenOfHearts, 50, 480, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard3 == 11)
+													{
+														cardValue3 = 10;
+														art.drawImage(jackOfHearts, 50, 480, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard3 == 12)
+														{
+															cardValue3 = 10;
+															art.drawImage(queenOfHearts, 50, 480, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard3 == 13)
+															{
+																cardValue3 = 10;
+																art.drawImage(kingOfHearts, 50, 480, 125, 175, this);
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			if(randomSuit3 == 2)
+			{
+				if(randomCard3 == 1)
+				{
+					art.drawString("Press Q to make the value 11 or press nothing to make the value 1", 140, 400);
+					cardValue3 = 1;
+					if(ace11)
+					{
+						cardValue3 = 11;
+					}
+					art.drawImage(aceOfDiamonds, 50, 480, 125, 175, this);
+				}
+				else
+				{
+					if(randomCard3 == 2)
+					{
+						cardValue3 = 2;
+						art.drawImage(twoOfDiamonds, 50, 480, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard3 == 3)
+						{
+							cardValue3 = 3;
+							art.drawImage(threeOfDiamonds, 50, 480, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard3 == 4)
+							{
+								cardValue3 = 4;
+								art.drawImage(fourOfDiamonds, 50, 480, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard3 == 5)
+								{
+									cardValue3 = 5;
+									art.drawImage(fiveOfDiamonds, 50, 480, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard3 == 6)
+									{
+										cardValue3 = 6;
+										art.drawImage(sixOfDiamonds, 50, 480, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard3 == 7)
+										{
+											cardValue3 = 7;
+											art.drawImage(sevenOfDiamonds, 50, 480, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard3 == 8)
+											{
+												cardValue3 = 8;
+												art.drawImage(eightOfDiamonds, 50, 480, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard3 == 9)
+												{	
+													cardValue3 = 9;
+													art.drawImage(nineOfDiamonds, 50, 480, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard3 == 10)
+													{
+														cardValue3 = 10;
+														art.drawImage(tenOfDiamonds, 50, 480, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard3 == 11)
+														{
+															cardValue3 = 10;
+															art.drawImage(jackOfDiamonds, 50, 480, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard3 == 12)
+															{
+																cardValue3 = 10;
+																art.drawImage(queenOfDiamonds, 50, 480, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard3 == 13)
+																{
+																	cardValue3 = 10;
+																	art.drawImage(kingOfDiamonds, 50, 480, 125, 175, this);
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				if(randomSuit3 == 3)
+				{
+
+					if(randomCard3 == 1)
+					{
+						art.drawString("Press Q to make the value 11 or press nothing to make the value 1", 140, 400);
+						cardValue3 = 1;
+						if(ace11)
+						{
+							cardValue3 = 11;
+						}
+						art.drawImage(aceOfClubs, 50, 480, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard3 == 2)
+						{
+							cardValue3 = 2;
+							art.drawImage(twoOfClubs, 50, 480, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard3 == 3)
+							{
+								cardValue3 = 3;
+								art.drawImage(threeOfClubs, 50, 480, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard3 == 4)
+								{
+									cardValue3 = 4;
+									art.drawImage(fourOfClubs, 50, 480, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard3 == 5)
+									{
+										cardValue3 = 5;
+										art.drawImage(fiveOfClubs, 50, 480, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard3 == 6)
+										{
+											cardValue3 = 6;
+											art.drawImage(sixOfClubs, 50, 480, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard3 == 7)
+											{
+												cardValue3 = 7;
+												art.drawImage(sevenOfClubs, 50, 480, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard3 == 8)
+												{
+													cardValue3 = 8;
+													art.drawImage(eightOfClubs, 50, 480, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard3 == 9)
+													{	
+														cardValue3 = 9;
+														art.drawImage(nineOfClubs, 50, 480, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard3 == 10)
+														{
+															cardValue3 = 10;
+															art.drawImage(tenOfClubs, 50, 480, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard3 == 11)
+															{
+																cardValue3 = 10;
+																art.drawImage(jackOfClubs, 50, 480, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard3 == 12)
+																{
+																	cardValue3 = 10;
+																	art.drawImage(queenOfClubs, 50, 480, 125, 175, this);
+																}
+																else
+																{
+																	if(randomCard3 == 13)
+																	{
+																		cardValue3 = 10;
+																		art.drawImage(kingOfClubs, 50, 480, 125, 175, this);
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+				}
+				else
+				{
+					if(randomSuit3 == 4)
+					{
+
+						if(randomCard3 == 1)
+						{
+							art.drawString("Press Q to make the value 11 or press nothing to make the value 1", 140, 400);
+							cardValue3 = 1;
+							if(ace11)
+							{
+								cardValue3 = 11;
+							}
+							art.drawImage(aceOfSpades, 50, 480, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard3 == 2)
+							{
+								cardValue3 = 2;
+								art.drawImage(twoOfSpades, 50, 480, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard3 == 3)
+								{
+									cardValue3 = 3;
+									art.drawImage(threeOfSpades, 50, 480, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard3 == 4)
+									{
+										cardValue3 = 4;
+										art.drawImage(fourOfSpades, 50, 480, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard3 == 5)
+										{
+											cardValue3 = 5;
+											art.drawImage(fiveOfSpades, 50, 480, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard3 == 6)
+											{
+												cardValue3 = 6;
+												art.drawImage(sixOfSpades, 50, 480, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard3 == 7)
+												{
+													cardValue3 = 7;
+													art.drawImage(sevenOfSpades, 50, 480, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard3 == 8)
+													{
+														cardValue3 = 8;
+														art.drawImage(eightOfSpades, 50, 480, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard3 == 9)
+														{	
+															cardValue3 = 9;
+															art.drawImage(nineOfSpades, 50, 480, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard3 == 10)
+															{
+																cardValue3 = 10;
+																art.drawImage(tenOfSpades, 50, 480, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard3 == 11)
+																{
+																	cardValue3 = 10;
+																	art.drawImage(jackOfSpades, 50, 480, 125, 175, this);
+																}
+																else
+																{
+																	if(randomCard3 == 12)
+																	{
+																		cardValue3 = 10;
+																		art.drawImage(queenOfSpades, 50, 480, 125, 175, this);
+																	}
+																	else
+																	{
+																		if(randomCard3 == 13)
+																		{
+																			cardValue3 = 10;
+																			art.drawImage(kingOfSpades, 50, 480, 125, 175, this);
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+
+					}
+				}
+			}
+		}
+	}
+	public void randomSuitandCard4(Graphics art) //this generates a random suit and card to be drawn in the fourth position
+	{
+		//generator to pick suit
+		if(position4)
+		{
+			randomSuit4 = generator.nextInt(4) + 1;
+			randomCard4 = generator.nextInt(13) + 1;
+			position4 = false;
+		}
+		//1 = hearts 2 = diamonds 3 = clubs 4 = spades
+		if(randomSuit4 == 1)
+		{
+			if(randomCard4 == 1)
+			{
+				art.drawString("Press Q to make the value 11 or press nothing to make the value 1", 140, 400);
+				cardValue4 = 1;
+				if(ace11)
+				{
+					cardValue4 = 11;
+				}
+				art.drawImage(aceOfHearts, 500, 480, 125, 175, this);
+			}
+			else
+			{
+				if(randomCard4 == 2)
+				{
+					cardValue4 = 2;
+					art.drawImage(twoOfHearts, 500, 480, 125, 175, this);
+				}
+				else
+				{
+					if(randomCard4 == 3)
+					{
+						cardValue4 = 3;
+						art.drawImage(threeOfHearts, 500, 480, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard4 == 4)
+						{
+							cardValue4 = 4;
+							art.drawImage(fourOfHearts, 500, 480, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard4 == 5)
+							{
+								cardValue4 = 5;
+								art.drawImage(fiveOfHearts, 500, 480, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard4 == 6)
+								{
+									cardValue4 = 6;
+									art.drawImage(sixOfHearts, 500, 480, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard4 == 7)
+									{
+										cardValue4 = 7;
+										art.drawImage(sevenOfHearts, 500, 480, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard4 == 8)
+										{
+											cardValue4 = 8;
+											art.drawImage(eightOfHearts, 500, 480, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard4 == 9)
+											{	
+												cardValue4 = 9;
+												art.drawImage(nineOfHearts, 500, 480, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard4 == 10)
+												{
+													cardValue4 = 10;
+													art.drawImage(tenOfHearts, 500, 480, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard4 == 11)
+													{
+														cardValue4 = 10;
+														art.drawImage(jackOfHearts, 500, 480, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard4 == 12)
+														{
+															cardValue4 = 10;
+															art.drawImage(queenOfHearts, 500, 480, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard4 == 13)
+															{
+																cardValue4 = 10;
+																art.drawImage(kingOfHearts, 500, 480, 125, 175, this);
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			if(randomSuit4 == 2)
+			{
+				if(randomCard4 == 1)
+				{
+					art.drawString("Press Q to make the value 11 or press nothing to make the value 1", 140, 400);
+					cardValue4 = 1;
+					if(ace11)
+					{
+						cardValue4 = 11;
+					}
+					art.drawImage(aceOfDiamonds, 500, 480, 125, 175, this);
+				}
+				else
+				{
+					if(randomCard4 == 2)
+					{
+						cardValue4 = 2;
+						art.drawImage(twoOfDiamonds, 500, 480, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard4 == 3)
+						{
+							cardValue4 = 3;
+							art.drawImage(threeOfDiamonds, 500, 480, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard4 == 4)
+							{
+								cardValue4 = 4;
+								art.drawImage(fourOfDiamonds, 500, 480, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard4 == 5)
+								{
+									cardValue4 = 5;
+									art.drawImage(fiveOfDiamonds, 500, 480, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard4 == 6)
+									{
+										cardValue4 = 6;
+										art.drawImage(sixOfDiamonds, 500, 480, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard4 == 7)
+										{
+											cardValue4 = 7;
+											art.drawImage(sevenOfDiamonds, 500, 480, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard4 == 8)
+											{
+												cardValue4 = 8;
+												art.drawImage(eightOfDiamonds, 500, 480, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard4 == 9)
+												{	
+													cardValue4 = 9;
+													art.drawImage(nineOfDiamonds, 500, 480, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard4 == 10)
+													{
+														cardValue4 = 10;
+														art.drawImage(tenOfDiamonds, 500, 480, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard4 == 11)
+														{
+															cardValue4 = 10;
+															art.drawImage(jackOfDiamonds, 500, 480, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard4 == 12)
+															{
+																cardValue4 = 10;
+																art.drawImage(queenOfDiamonds, 500, 480, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard4 == 13)
+																{
+																	cardValue4 = 10;
+																	art.drawImage(kingOfDiamonds, 500, 480, 125, 175, this);
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				if(randomSuit4 == 3)
+				{
+
+					if(randomCard4 == 1)
+					{
+						art.drawString("Press Q to make the value 11 or press nothing to make the value 1", 140, 400);
+						cardValue4 = 1;
+						if(ace11)
+						{
+							cardValue4 = 11;
+						}
+						art.drawImage(aceOfClubs, 500, 480, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard4 == 2)
+						{
+							cardValue4 = 2;
+							art.drawImage(twoOfClubs, 500, 480, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard4 == 3)
+							{
+								cardValue4 = 3;
+								art.drawImage(threeOfClubs, 500, 480, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard4 == 4)
+								{
+									cardValue4 = 4;
+									art.drawImage(fourOfClubs, 500, 480, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard4 == 5)
+									{
+										cardValue4 = 5;
+										art.drawImage(fiveOfClubs, 500, 480, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard4 == 6)
+										{
+											cardValue4 = 6;
+											art.drawImage(sixOfClubs, 500, 480, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard4 == 7)
+											{
+												cardValue4 = 7;
+												art.drawImage(sevenOfClubs, 500, 480, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard4 == 8)
+												{
+													cardValue4 = 8;
+													art.drawImage(eightOfClubs, 500, 480, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard4 == 9)
+													{	
+														cardValue4 = 9;
+														art.drawImage(nineOfClubs, 500, 480, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard4 == 10)
+														{
+															cardValue4 = 10;
+															art.drawImage(tenOfClubs, 500, 480, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard4 == 11)
+															{
+																cardValue4 = 10;
+																art.drawImage(jackOfClubs, 500, 480, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard4 == 12)
+																{
+																	cardValue4 = 10;
+																	art.drawImage(queenOfClubs, 500, 480, 125, 175, this);
+																}
+																else
+																{
+																	if(randomCard4 == 13)
+																	{
+																		cardValue4 = 10;
+																		art.drawImage(kingOfClubs, 500, 480, 125, 175, this);
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+				}
+				else
+				{
+					if(randomSuit4 == 4)
+					{
+
+						if(randomCard4 == 1)
+						{
+							art.drawString("Press Q to make the value 11 or press nothing to make the value 1", 140, 400);
+							cardValue4 = 1;
+							if(ace11)
+							{
+								cardValue4 = 11;
+							}
+							art.drawImage(aceOfSpades, 500, 480, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard4 == 2)
+							{
+								cardValue4 = 2;
+								art.drawImage(twoOfSpades, 500, 480, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard4 == 3)
+								{
+									cardValue4 = 3;
+									art.drawImage(threeOfSpades, 500, 480, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard4 == 4)
+									{
+										cardValue4 = 4;
+										art.drawImage(fourOfSpades, 500, 480, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard4 == 5)
+										{
+											cardValue4 = 5;
+											art.drawImage(fiveOfSpades, 500, 480, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard4 == 6)
+											{
+												cardValue4 = 6;
+												art.drawImage(sixOfSpades, 500, 480, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard4 == 7)
+												{
+													cardValue4 = 7;
+													art.drawImage(sevenOfSpades, 500, 480, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard4 == 8)
+													{
+														cardValue4 = 8;
+														art.drawImage(eightOfSpades, 500, 480, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard4 == 9)
+														{	
+															cardValue4 = 9;
+															art.drawImage(nineOfSpades, 500, 480, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard4 == 10)
+															{
+																cardValue4 = 10;
+																art.drawImage(tenOfSpades, 500, 480, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard4 == 11)
+																{
+																	cardValue4 = 10;
+																	art.drawImage(jackOfSpades, 500, 480, 125, 175, this);
+																}
+																else
+																{
+																	if(randomCard4 == 12)
+																	{
+																		cardValue4 = 10;
+																		art.drawImage(queenOfSpades, 500, 480, 125, 175, this);
+																	}
+																	else
+																	{
+																		if(randomCard4 == 13)
+																		{
+																			cardValue4 = 10;
+																			art.drawImage(kingOfSpades, 500, 480, 125, 175, this);
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+
+					}
+				}
+			}
+		}
+	}
+	public void randomSuitandCard5(Graphics art) //this generates a random suit and card to be drawn in the fifth position
+	{
+		//generator to pick suit
+		if(position5)
+		{
+			randomSuit5 = generator.nextInt(4) + 1;
+			randomCard5 = generator.nextInt(13) + 1;
+			position5 = false;
+		}
+		//1 = hearts 2 = diamonds 3 = clubs 4 = spades
+		if(randomSuit5 == 1)
+		{
+			if(randomCard5 == 1)
+			{
+				cardValue5 = 11;
+				art.drawImage(aceOfHearts, 50, 20, 125, 175, this);
+			}
+			else
+			{
+				if(randomCard5 == 2)
+				{
+					cardValue5 = 2;
+					art.drawImage(twoOfHearts, 50, 20, 125, 175, this);
+				}
+				else
+				{
+					if(randomCard5 == 3)
+					{
+						cardValue5 = 3;
+						art.drawImage(threeOfHearts, 50, 20, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard5 == 4)
+						{
+							cardValue5 = 4;
+							art.drawImage(fourOfHearts, 50, 20, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard5 == 5)
+							{
+								cardValue5 = 5;
+								art.drawImage(fiveOfHearts, 50, 20, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard5 == 6)
+								{
+									cardValue5 = 6;
+									art.drawImage(sixOfHearts, 50, 20, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard5 == 7)
+									{
+										cardValue5 = 7;
+										art.drawImage(sevenOfHearts, 50, 20, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard5 == 8)
+										{
+											cardValue5 = 8;
+											art.drawImage(eightOfHearts, 50, 20, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard5 == 9)
+											{	
+												cardValue5 = 9;
+												art.drawImage(nineOfHearts, 50, 20, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard5 == 10)
+												{
+													cardValue5 = 10;
+													art.drawImage(tenOfHearts, 50, 20, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard5 == 11)
+													{
+														cardValue5 = 10;
+														art.drawImage(jackOfHearts, 50, 20, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard5 == 12)
+														{
+															cardValue5 = 10;
+															art.drawImage(queenOfHearts, 50, 20, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard5 == 13)
+															{
+																cardValue5 = 10;
+																art.drawImage(kingOfHearts, 50, 20, 125, 175, this);
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			if(randomSuit5 == 2)
+			{
+				if(randomCard5 == 1)
+				{
+					cardValue5 = 11;
+					art.drawImage(aceOfDiamonds, 50, 20, 125, 175, this);
+				}
+				else
+				{
+					if(randomCard5 == 2)
+					{
+						cardValue5 = 2;
+						art.drawImage(twoOfDiamonds, 50, 20, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard5 == 3)
+						{
+							cardValue5 = 3;
+							art.drawImage(threeOfDiamonds, 50, 20, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard5 == 4)
+							{
+								cardValue5 = 4;
+								art.drawImage(fourOfDiamonds, 50, 20, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard5 == 5)
+								{
+									cardValue5 = 5;
+									art.drawImage(fiveOfDiamonds, 50, 20, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard5 == 6)
+									{
+										cardValue5 = 6;
+										art.drawImage(sixOfDiamonds, 50, 20, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard5 == 7)
+										{
+											cardValue5 = 7;
+											art.drawImage(sevenOfDiamonds, 50, 20, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard5 == 8)
+											{
+												cardValue5 = 8;
+												art.drawImage(eightOfDiamonds, 50, 20, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard5 == 9)
+												{	
+													cardValue5 = 9;
+													art.drawImage(nineOfDiamonds, 50, 20, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard5 == 10)
+													{
+														cardValue5 = 10;
+														art.drawImage(tenOfDiamonds, 50, 20, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard5 == 11)
+														{
+															cardValue5 = 10;
+															art.drawImage(jackOfDiamonds, 50, 20, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard5 == 12)
+															{
+																cardValue5 = 10;
+																art.drawImage(queenOfDiamonds, 50, 20, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard5 == 13)
+																{
+																	cardValue5 = 10;
+																	art.drawImage(kingOfDiamonds, 50, 20, 125, 175, this);
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				if(randomSuit5 == 3)
+				{
+
+					if(randomCard5 == 1)
+					{
+						cardValue5 = 11;
+						art.drawImage(aceOfClubs, 50, 20, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard5 == 2)
+						{
+							cardValue5 = 2;
+							art.drawImage(twoOfClubs, 50, 20, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard5 == 3)
+							{
+								cardValue5 = 3;
+								art.drawImage(threeOfClubs, 50, 20, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard5 == 4)
+								{
+									cardValue5 = 4;
+									art.drawImage(fourOfClubs, 50, 20, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard5 == 5)
+									{
+										cardValue5 = 5;
+										art.drawImage(fiveOfClubs, 50, 20, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard5 == 6)
+										{
+											cardValue5 = 6;
+											art.drawImage(sixOfClubs, 50, 20, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard5 == 7)
+											{
+												cardValue5 = 7;
+												art.drawImage(sevenOfClubs, 50, 20, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard5 == 8)
+												{
+													cardValue5 = 8;
+													art.drawImage(eightOfClubs, 50, 20, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard5 == 9)
+													{	
+														cardValue5 = 9;
+														art.drawImage(nineOfClubs, 50, 20, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard5 == 10)
+														{
+															cardValue5 = 10;
+															art.drawImage(tenOfClubs, 50, 20, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard5 == 11)
+															{
+																cardValue5 = 10;
+																art.drawImage(jackOfClubs, 50, 20, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard5 == 12)
+																{
+																	cardValue5 = 10;
+																	art.drawImage(queenOfClubs, 50, 20, 125, 175, this);
+																}
+																else
+																{
+																	if(randomCard5 == 13)
+																	{
+																		cardValue5 = 10;
+																		art.drawImage(kingOfClubs, 50, 20, 125, 175, this);
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+				}
+				else
+				{
+					if(randomSuit5 == 4)
+					{
+
+						if(randomCard5 == 1)
+						{
+							cardValue5 = 11;
+							art.drawImage(aceOfSpades, 50, 20, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard5 == 2)
+							{
+								cardValue5 = 2;
+								art.drawImage(twoOfSpades, 50, 20, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard5 == 3)
+								{
+									cardValue5 = 3;
+									art.drawImage(threeOfSpades, 50, 20, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard5 == 4)
+									{
+										cardValue5 = 4;
+										art.drawImage(fourOfSpades, 50, 20, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard5 == 5)
+										{
+											cardValue5 = 5;
+											art.drawImage(fiveOfSpades, 50, 20, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard5 == 6)
+											{
+												cardValue5 = 6;
+												art.drawImage(sixOfSpades, 50, 20, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard5 == 7)
+												{
+													cardValue5 = 7;
+													art.drawImage(sevenOfSpades, 50, 20, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard5 == 8)
+													{
+														cardValue5 = 8;
+														art.drawImage(eightOfSpades, 50, 20, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard5 == 9)
+														{	
+															cardValue5 = 9;
+															art.drawImage(nineOfSpades, 50, 20, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard5 == 10)
+															{
+																cardValue5 = 10;
+																art.drawImage(tenOfSpades, 50, 20, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard5 == 11)
+																{
+																	cardValue5 = 10;
+																	art.drawImage(jackOfSpades, 50, 20, 125, 175, this);
+																}
+																else
+																{
+																	if(randomCard5 == 12)
+																	{
+																		cardValue5 = 10;
+																		art.drawImage(queenOfSpades, 50, 20, 125, 175, this);
+																	}
+																	else
+																	{
+																		if(randomCard5 == 13)
+																		{
+																			cardValue5 = 10;
+																			art.drawImage(kingOfSpades, 50, 20, 125, 175, this);
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+
+					}
+				}
+			}
+		}
+	}
+	public void randomSuitandCard6(Graphics art) //this generates a random suit and card to be drawn in the sixth position
+	{
+		//generator to pick suit
+		if(position6)
+		{
+			randomSuit6 = generator.nextInt(4) + 1;
+			randomCard6 = generator.nextInt(13) + 1;
+			position6 = false;
+		}
+		//1 = hearts 2 = diamonds 3 = clubs 4 = spades
+		if(randomSuit6 == 1)
+		{
+			if(randomCard6 == 1)
+			{
+				cardValue6 = 11;
+				art.drawImage(aceOfHearts, 500, 20, 125, 175, this);
+			}
+			else
+			{
+				if(randomCard6 == 2)
+				{
+					cardValue6 = 2;
+					art.drawImage(twoOfHearts, 500, 20, 125, 175, this);
+				}
+				else
+				{
+					if(randomCard6 == 3)
+					{
+						cardValue6 = 3;
+						art.drawImage(threeOfHearts, 500, 20, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard6 == 4)
+						{
+							cardValue6 = 4;
+							art.drawImage(fourOfHearts, 500, 20, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard6 == 5)
+							{
+								cardValue6 = 5;
+								art.drawImage(fiveOfHearts, 500, 20, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard6 == 6)
+								{
+									cardValue6 = 6;
+									art.drawImage(sixOfHearts, 500, 20, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard6 == 7)
+									{
+										cardValue6 = 7;
+										art.drawImage(sevenOfHearts, 500, 20, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard6 == 8)
+										{
+											cardValue6 = 8;
+											art.drawImage(eightOfHearts, 500, 20, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard6 == 9)
+											{	
+												cardValue6 = 9;
+												art.drawImage(nineOfHearts, 500, 20, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard6 == 10)
+												{
+													cardValue6 = 10;
+													art.drawImage(tenOfHearts, 500, 20, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard6 == 11)
+													{
+														cardValue6 = 10;
+														art.drawImage(jackOfHearts, 500, 20, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard6 == 12)
+														{
+															cardValue6 = 10;
+															art.drawImage(queenOfHearts, 500, 20, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard6 == 13)
+															{
+																cardValue6 = 10;
+																art.drawImage(kingOfHearts, 500, 20, 125, 175, this);
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			if(randomSuit6 == 2)
+			{
+				if(randomCard6 == 1)
+				{
+					cardValue6 = 11;
+					art.drawImage(aceOfDiamonds, 500, 20, 125, 175, this);
+				}
+				else
+				{
+					if(randomCard6 == 2)
+					{
+						cardValue6 = 2;
+						art.drawImage(twoOfDiamonds, 500, 20, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard6 == 3)
+						{
+							cardValue6 = 3;
+							art.drawImage(threeOfDiamonds, 500, 20, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard6 == 4)
+							{
+								cardValue6 = 4;
+								art.drawImage(fourOfDiamonds, 500, 20, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard6 == 5)
+								{
+									cardValue6 = 5;
+									art.drawImage(fiveOfDiamonds, 500, 20, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard6 == 6)
+									{
+										cardValue6 = 6;
+										art.drawImage(sixOfDiamonds, 500, 20, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard6 == 7)
+										{
+											cardValue6 = 7;
+											art.drawImage(sevenOfDiamonds, 500, 20, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard6 == 8)
+											{
+												cardValue6 = 8;
+												art.drawImage(eightOfDiamonds, 500, 20, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard6 == 9)
+												{	
+													cardValue6 = 9;
+													art.drawImage(nineOfDiamonds, 500, 20, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard6 == 10)
+													{
+														cardValue6 = 10;
+														art.drawImage(tenOfDiamonds, 500, 20, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard6 == 11)
+														{
+															cardValue6 = 10;
+															art.drawImage(jackOfDiamonds, 500, 20, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard6 == 12)
+															{
+																cardValue6 = 10;
+																art.drawImage(queenOfDiamonds, 500, 20, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard6 == 13)
+																{
+																	cardValue6 = 10;
+																	art.drawImage(kingOfDiamonds, 500, 20, 125, 175, this);
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				if(randomSuit6 == 3)
+				{
+
+					if(randomCard6 == 1)
+					{
+						cardValue6 = 11;
+						art.drawImage(aceOfClubs, 500, 20, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard6 == 2)
+						{
+							cardValue6 = 2;
+							art.drawImage(twoOfClubs, 500, 20, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard6 == 3)
+							{
+								cardValue6 = 3;
+								art.drawImage(threeOfClubs, 500, 20, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard6 == 4)
+								{
+									cardValue6 = 4;
+									art.drawImage(fourOfClubs, 500, 20, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard6 == 5)
+									{
+										cardValue6 = 5;
+										art.drawImage(fiveOfClubs, 500, 20, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard6 == 6)
+										{
+											cardValue6 = 6;
+											art.drawImage(sixOfClubs, 500, 20, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard6 == 7)
+											{
+												cardValue6 = 7;
+												art.drawImage(sevenOfClubs, 500, 20, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard6 == 8)
+												{
+													cardValue6 = 8;
+													art.drawImage(eightOfClubs, 500, 20, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard6 == 9)
+													{	
+														cardValue6 = 9;
+														art.drawImage(nineOfClubs, 500, 20, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard6 == 10)
+														{
+															cardValue6 = 10;
+															art.drawImage(tenOfClubs, 500, 20, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard6 == 11)
+															{
+																cardValue6 = 10;
+																art.drawImage(jackOfClubs, 500, 20, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard6 == 12)
+																{
+																	cardValue6 = 10;
+																	art.drawImage(queenOfClubs, 500, 20, 125, 175, this);
+																}
+																else
+																{
+																	if(randomCard6 == 13)
+																	{
+																		cardValue6 = 10;
+																		art.drawImage(kingOfClubs, 500, 20, 125, 175, this);
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+				}
+				else
+				{
+					if(randomSuit6 == 4)
+					{
+
+						if(randomCard6 == 1)
+						{
+							cardValue6 = 11;
+							art.drawImage(aceOfSpades, 500, 20, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard6 == 2)
+							{
+								cardValue6 = 2;
+								art.drawImage(twoOfSpades, 500, 20, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard6 == 3)
+								{
+									cardValue6 = 3;
+									art.drawImage(threeOfSpades, 500, 20, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard6 == 4)
+									{
+										cardValue6 = 4;
+										art.drawImage(fourOfSpades, 500, 20, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard6 == 5)
+										{
+											cardValue6 = 5;
+											art.drawImage(fiveOfSpades, 500, 20, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard6 == 6)
+											{
+												cardValue6 = 6;
+												art.drawImage(sixOfSpades, 500, 20, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard6 == 7)
+												{
+													cardValue6 = 7;
+													art.drawImage(sevenOfSpades, 500, 20, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard6 == 8)
+													{
+														cardValue6 = 8;
+														art.drawImage(eightOfSpades, 500, 20, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard6 == 9)
+														{	
+															cardValue6 = 9;
+															art.drawImage(nineOfSpades, 500, 20, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard6 == 10)
+															{
+																cardValue6 = 10;
+																art.drawImage(tenOfSpades, 500, 20, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard6 == 11)
+																{
+																	cardValue6 = 10;
+																	art.drawImage(jackOfSpades, 500, 20, 125, 175, this);
+																}
+																else
+																{
+																	if(randomCard6 == 12)
+																	{
+																		cardValue6 = 10;
+																		art.drawImage(queenOfSpades, 500, 20, 125, 175, this);
+																	}
+																	else
+																	{
+																		if(randomCard6 == 13)
+																		{
+																			cardValue6 = 10;
+																			art.drawImage(kingOfSpades, 500, 20, 125, 175, this);
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+
+					}
+				}
+			}
+		}
+	}
+	public void randomSuitandCard7(Graphics art) //this generates a random suit and card to be drawn in the seventh position
+	{
+
+		//generator to pick suit
+		if(position7)
+		{
+			randomSuit7 = generator.nextInt(4) + 1;
+			randomCard7 = generator.nextInt(13) + 1;
+			position7 = false;
+		}
+		//1 = hearts 2 = diamonds 3 = clubs 4 = spades
+		if(randomSuit7 == 1)
+		{
+			if(randomCard7 == 1)
+			{
+				cardValue7 = 11;
+				art.drawImage(aceOfHearts, 200, 20, 125, 175, this);
+			}
+			else
+			{
+				if(randomCard7 == 2)
+				{
+					cardValue7 = 2;
+					art.drawImage(twoOfHearts, 200, 20, 125, 175, this);
+				}
+				else
+				{
+					if(randomCard7 == 3)
+					{
+						cardValue7 = 3;
+						art.drawImage(threeOfHearts, 200, 20, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard7 == 4)
+						{
+							cardValue7 = 4;
+							art.drawImage(fourOfHearts, 200, 20, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard7 == 5)
+							{
+								cardValue7 = 5;
+								art.drawImage(fiveOfHearts, 200, 20, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard7 == 6)
+								{
+									cardValue7 = 6;
+									art.drawImage(sixOfHearts, 200, 20, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard7 == 7)
+									{
+										cardValue7 = 7;
+										art.drawImage(sevenOfHearts, 200, 20, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard7 == 8)
+										{
+											cardValue7 = 8;
+											art.drawImage(eightOfHearts, 200, 20, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard7 == 9)
+											{	
+												cardValue7 = 9;
+												art.drawImage(nineOfHearts, 200, 20, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard7 == 10)
+												{
+													cardValue7 = 10;
+													art.drawImage(tenOfHearts, 200, 20, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard7 == 11)
+													{
+														cardValue7 = 10;
+														art.drawImage(jackOfHearts, 200, 20, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard7 == 12)
+														{
+															cardValue7 = 10;
+															art.drawImage(queenOfHearts, 200, 20, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard7 == 13)
+															{
+																cardValue7 = 10;
+																art.drawImage(kingOfHearts, 200, 20, 125, 175, this);
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			if(randomSuit7 == 2)
+			{
+				if(randomCard7 == 1)
+				{
+					cardValue7 = 11;
+					art.drawImage(aceOfDiamonds, 200, 20, 125, 175, this);
+				}
+				else
+				{
+					if(randomCard7 == 2)
+					{
+						cardValue7 = 2;
+						art.drawImage(twoOfDiamonds, 200, 20, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard7 == 3)
+						{
+							cardValue7 = 3;
+							art.drawImage(threeOfDiamonds, 200, 20, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard7 == 4)
+							{
+								cardValue7 = 4;
+								art.drawImage(fourOfDiamonds, 200, 20, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard7 == 5)
+								{
+									cardValue7 = 5;
+									art.drawImage(fiveOfDiamonds, 200, 20, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard7 == 6)
+									{
+										cardValue7 = 6;
+										art.drawImage(sixOfDiamonds, 200, 20, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard7 == 7)
+										{
+											cardValue7 = 7;
+											art.drawImage(sevenOfDiamonds, 200, 20, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard7 == 8)
+											{
+												cardValue7 = 8;
+												art.drawImage(eightOfDiamonds, 200, 20, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard7 == 9)
+												{	
+													cardValue7 = 9;
+													art.drawImage(nineOfDiamonds, 200, 20, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard7 == 10)
+													{
+														cardValue7 = 10;
+														art.drawImage(tenOfDiamonds, 200, 20, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard7 == 11)
+														{
+															cardValue7 = 10;
+															art.drawImage(jackOfDiamonds, 200, 20, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard7 == 12)
+															{
+																cardValue7 = 10;
+																art.drawImage(queenOfDiamonds, 200, 20, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard7 == 13)
+																{
+																	cardValue7 = 10;
+																	art.drawImage(kingOfDiamonds, 200, 20, 125, 175, this);
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				if(randomSuit7 == 3)
+				{
+
+					if(randomCard7 == 1)
+					{
+						cardValue7 = 11;
+						art.drawImage(aceOfClubs, 200, 20, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard7 == 2)
+						{
+							cardValue7 = 2;
+							art.drawImage(twoOfClubs, 200, 20, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard7 == 3)
+							{
+								cardValue7 = 3;
+								art.drawImage(threeOfClubs, 200, 20, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard7 == 4)
+								{
+									cardValue7 = 4;
+									art.drawImage(fourOfClubs, 200, 20, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard7 == 5)
+									{
+										cardValue7 = 5;
+										art.drawImage(fiveOfClubs, 200, 20, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard7 == 6)
+										{
+											cardValue7 = 6;
+											art.drawImage(sixOfClubs, 200, 20, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard7 == 7)
+											{
+												cardValue7 = 7;
+												art.drawImage(sevenOfClubs, 200, 20, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard7 == 8)
+												{
+													cardValue7 = 8;
+													art.drawImage(eightOfClubs, 200, 20, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard7 == 9)
+													{	
+														cardValue7 = 9;
+														art.drawImage(nineOfClubs, 200, 20, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard7 == 10)
+														{
+															cardValue7 = 10;
+															art.drawImage(tenOfClubs, 200, 20, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard7 == 11)
+															{
+																cardValue7 = 10;
+																art.drawImage(jackOfClubs, 200, 20, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard7 == 12)
+																{
+																	cardValue7 = 10;
+																	art.drawImage(queenOfClubs, 200, 20, 125, 175, this);
+																}
+																else
+																{
+																	if(randomCard7 == 13)
+																	{
+																		cardValue7 = 10;
+																		art.drawImage(kingOfClubs, 200, 20, 125, 175, this);
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+				}
+				else
+				{
+					if(randomSuit7 == 4)
+					{
+
+						if(randomCard7 == 1)
+						{
+							cardValue7 = 11;
+							art.drawImage(aceOfSpades, 200, 20, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard7 == 2)
+							{
+								cardValue7 = 2;
+								art.drawImage(twoOfSpades, 200, 20, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard7 == 3)
+								{
+									cardValue7 = 3;
+									art.drawImage(threeOfSpades, 200, 20, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard7 == 4)
+									{
+										cardValue7 = 4;
+										art.drawImage(fourOfSpades, 200, 20, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard7 == 5)
+										{
+											cardValue7 = 5;
+											art.drawImage(fiveOfSpades, 200, 20, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard7 == 6)
+											{
+												cardValue7 = 6;
+												art.drawImage(sixOfSpades, 200, 20, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard7 == 7)
+												{
+													cardValue7 = 7;
+													art.drawImage(sevenOfSpades, 200, 20, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard7 == 8)
+													{
+														cardValue7 = 8;
+														art.drawImage(eightOfSpades, 200, 20, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard7 == 9)
+														{	
+															cardValue7 = 9;
+															art.drawImage(nineOfSpades, 200, 20, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard7 == 10)
+															{
+																cardValue7 = 10;
+																art.drawImage(tenOfSpades, 200, 20, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard7 == 11)
+																{
+																	cardValue7 = 10;
+																	art.drawImage(jackOfSpades, 200, 20, 125, 175, this);
+																}
+																else
+																{
+																	if(randomCard7 == 12)
+																	{
+																		cardValue7 = 10;
+																		art.drawImage(queenOfSpades, 200, 20, 125, 175, this);
+																	}
+																	else
+																	{
+																		if(randomCard7 == 13)
+																		{
+																			cardValue7 = 10;
+																			art.drawImage(kingOfSpades, 200, 20, 125, 175, this);
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+
+					}
+				}
+			}
+		}
+	}
+	public void randomSuitandCard8(Graphics art) //this generates a random suit and card to be drawn in the eighth position
+	{
+		//generator to pick suit
+		if(position8)
+		{
+			randomSuit8 = generator.nextInt(4) + 1;
+			randomCard8 = generator.nextInt(13) + 1;
+			position8 = false;
+		}
+		//1 = hearts 2 = diamonds 3 = clubs 4 = spades
+		if(randomSuit8 == 1)
+		{
+			if(randomCard8 == 1)
+			{
+				cardValue8 = 11;
+				art.drawImage(aceOfHearts, 350, 20, 125, 175, this);
+			}
+			else
+			{
+				if(randomCard8 == 2)
+				{
+					cardValue8 = 2;
+					art.drawImage(twoOfHearts, 350, 20, 125, 175, this);
+				}
+				else
+				{
+					if(randomCard8 == 3)
+					{
+						cardValue8 = 3;
+						art.drawImage(threeOfHearts, 350, 20, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard8 == 4)
+						{
+							cardValue8 = 4;
+							art.drawImage(fourOfHearts, 350, 20, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard8 == 5)
+							{
+								cardValue8 = 5;
+								art.drawImage(fiveOfHearts, 350, 20, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard8 == 6)
+								{
+									cardValue8 = 6;
+									art.drawImage(sixOfHearts, 350, 20, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard8 == 7)
+									{
+										cardValue8 = 7;
+										art.drawImage(sevenOfHearts, 350, 20, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard8 == 8)
+										{
+											cardValue8 = 8;
+											art.drawImage(eightOfHearts, 350, 20, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard8 == 9)
+											{	
+												cardValue8 = 9;
+												art.drawImage(nineOfHearts, 350, 20, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard8 == 10)
+												{
+													cardValue8 = 10;
+													art.drawImage(tenOfHearts, 350, 20, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard8 == 11)
+													{
+														cardValue8 = 10;
+														art.drawImage(jackOfHearts, 350, 20, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard8 == 12)
+														{
+															cardValue8 = 10;
+															art.drawImage(queenOfHearts, 350, 20, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard8 == 13)
+															{
+																cardValue8 = 10;
+																art.drawImage(kingOfHearts, 350, 20, 125, 175, this);
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			if(randomSuit8 == 2)
+			{
+				if(randomCard8 == 1)
+				{
+					cardValue8 = 11;
+					art.drawImage(aceOfDiamonds, 350, 20, 125, 175, this);
+				}
+				else
+				{
+					if(randomCard8 == 2)
+					{
+						cardValue8 = 2;
+						art.drawImage(twoOfDiamonds, 350, 20, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard8 == 3)
+						{
+							cardValue8 = 3;
+							art.drawImage(threeOfDiamonds, 350, 20, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard8 == 4)
+							{
+								cardValue8 = 4;
+								art.drawImage(fourOfDiamonds, 350, 20, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard8 == 5)
+								{
+									cardValue8 = 5;
+									art.drawImage(fiveOfDiamonds, 350, 20, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard8 == 6)
+									{
+										cardValue8 = 6;
+										art.drawImage(sixOfDiamonds, 350, 20, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard8 == 7)
+										{
+											cardValue8 = 7;
+											art.drawImage(sevenOfDiamonds, 350, 20, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard8 == 8)
+											{
+												cardValue8 = 8;
+												art.drawImage(eightOfDiamonds, 350, 20, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard8 == 9)
+												{	
+													cardValue8 = 9;
+													art.drawImage(nineOfDiamonds, 350, 20, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard8 == 10)
+													{
+														cardValue8 = 10;
+														art.drawImage(tenOfDiamonds, 350, 20, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard8 == 11)
+														{
+															cardValue8 = 10;
+															art.drawImage(jackOfDiamonds, 350, 20, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard8 == 12)
+															{
+																cardValue8 = 10;
+																art.drawImage(queenOfDiamonds, 350, 20, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard8 == 13)
+																{
+																	cardValue8 = 10;
+																	art.drawImage(kingOfDiamonds, 350, 20, 125, 175, this);
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				if(randomSuit8 == 3)
+				{
+
+					if(randomCard8 == 1)
+					{
+						cardValue8 = 11;
+						art.drawImage(aceOfClubs, 350, 20, 125, 175, this);
+					}
+					else
+					{
+						if(randomCard8 == 2)
+						{
+							cardValue8 = 2;
+							art.drawImage(twoOfClubs, 350, 20, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard8 == 3)
+							{
+								cardValue8 = 3;
+								art.drawImage(threeOfClubs, 350, 20, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard8 == 4)
+								{
+									cardValue8 = 4;
+									art.drawImage(fourOfClubs, 350, 20, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard8 == 5)
+									{
+										cardValue8 = 5;
+										art.drawImage(fiveOfClubs, 350, 20, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard8 == 6)
+										{
+											cardValue8 = 6;
+											art.drawImage(sixOfClubs, 350, 20, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard8 == 7)
+											{
+												cardValue8 = 7;
+												art.drawImage(sevenOfClubs, 350, 20, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard8 == 8)
+												{
+													cardValue8 = 8;
+													art.drawImage(eightOfClubs, 350, 20, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard8 == 9)
+													{	
+														cardValue8 = 9;
+														art.drawImage(nineOfClubs, 350, 20, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard8 == 10)
+														{
+															cardValue8 = 10;
+															art.drawImage(tenOfClubs, 350, 20, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard8 == 11)
+															{
+																cardValue8 = 10;
+																art.drawImage(jackOfClubs, 350, 20, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard8 == 12)
+																{
+																	cardValue8 = 10;
+																	art.drawImage(queenOfClubs, 350, 20, 125, 175, this);
+																}
+																else
+																{
+																	if(randomCard8 == 13)
+																	{
+																		cardValue8 = 10;
+																		art.drawImage(kingOfClubs, 350, 20, 125, 175, this);
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+				}
+				else
+				{
+					if(randomSuit8 == 4)
+					{
+
+						if(randomCard8 == 1)
+						{
+							cardValue8 = 11;
+							art.drawImage(aceOfSpades, 350, 20, 125, 175, this);
+						}
+						else
+						{
+							if(randomCard8 == 2)
+							{
+								cardValue8 = 2;
+								art.drawImage(twoOfSpades, 350, 20, 125, 175, this);
+							}
+							else
+							{
+								if(randomCard8 == 3)
+								{
+									cardValue8 = 3;
+									art.drawImage(threeOfSpades, 350, 20, 125, 175, this);
+								}
+								else
+								{
+									if(randomCard8 == 4)
+									{
+										cardValue8 = 4;
+										art.drawImage(fourOfSpades, 350, 20, 125, 175, this);
+									}
+									else
+									{
+										if(randomCard8 == 5)
+										{
+											cardValue8 = 5;
+											art.drawImage(fiveOfSpades, 350, 20, 125, 175, this);
+										}
+										else
+										{
+											if(randomCard8 == 6)
+											{
+												cardValue8 = 6;
+												art.drawImage(sixOfSpades, 350, 20, 125, 175, this);
+											}
+											else
+											{
+												if(randomCard8 == 7)
+												{
+													cardValue8 = 7;
+													art.drawImage(sevenOfSpades, 350, 20, 125, 175, this);
+												}
+												else
+												{
+													if(randomCard8 == 8)
+													{
+														cardValue8 = 8;
+														art.drawImage(eightOfSpades, 350, 20, 125, 175, this);
+													}
+													else
+													{
+														if(randomCard8 == 9)
+														{	
+															cardValue8 = 9;
+															art.drawImage(nineOfSpades, 350, 20, 125, 175, this);
+														}
+														else
+														{
+															if(randomCard8 == 10)
+															{
+																cardValue8 = 10;
+																art.drawImage(tenOfSpades, 350, 20, 125, 175, this);
+															}
+															else
+															{
+																if(randomCard8 == 11)
+																{
+																	cardValue8 = 10;
+																	art.drawImage(jackOfSpades, 350, 20, 125, 175, this);
+																}
+																else
+																{
+																	if(randomCard8 == 12)
+																	{
+																		cardValue8 = 10;
+																		art.drawImage(queenOfSpades, 350, 20, 125, 175, this);
+																	}
+																	else
+																	{
+																		if(randomCard8 == 13)
+																		{
+																			cardValue8 = 10;
+																			art.drawImage(kingOfSpades, 350, 20, 125, 175, this);
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+
+					}
+				}
+			}
+		}
+	}
+
+	//this draws the image for the back of the card to hide the dealer's second card
+	public void backCard(Graphics art)
+	{
+		if(back)
+		{
+			art.drawImage(backOfCard, 200, 20, 125, 175, this);
+		}
+
+	}
+
+	//this is the main method of the program
+	public void cardValueUsers(Graphics art)
+	{
+		position5 = false;
+		//the following happens if the user clicks stay
+		if(stay)
+		{
+			//the dealer's second card flips
+			back = false;
+			timer ++;
+			//after 200 milliseconds the round restarts
+			if(timer == 200)
+			{
+				stay = false;
+				playAgain(art);
+			}
+
+			
+
+			if(firstStay)
+			{
+				//the seventh position card is turned over
+				position7 = true;
+				randomSuitandCard7(art);
+				//calculates if the dealer should hit or not
+				if(cardValue7 + cardValue8 < 17)
+				{
+					position5 = true;
+					randomSuitandCard5(art);
+					//calculates if the dealer should hit again or not
+					if(cardValue7 + cardValue8 + cardValue5 < 17)
+					{
+						position6 = true;
+					}
+				}
+				firstStay = false;
+			}
+			//prints out the dealer's card value
+			firstbotCardValue = cardValue5 + cardValue7 + cardValue8 + cardValue6;
+			//randomSuitandCard7(art);
+			art.setColor(Color.yellow);
+			art.drawString("Card Value: " +firstbotCardValue, 140, 240);
+			art.setColor(Color.white);
+			whoWins(art);
+			score(art);
+			}
+	}
+	//calculates if the dealer or user wins based on what cards are present
+	public void whoWins(Graphics art)
+	{
+		if(firstbotCardValue >= 22)
+		{
+			if(userCardValue >= 22)
+			{
+				dealerWin = true;
+			}
+			if(userCardValue <= 21)
+			{
+				userWin = true;
+			}
+		}
+		if(userCardValue > firstbotCardValue)
+		{
+			if(userCardValue >= 22)
+			{
+				dealerWin = true;
+			}
+			if(userCardValue <= 21)
+			{
+				userWin = true;
+				
+			}
+		}
+		if(firstbotCardValue > userCardValue)
+		{
+			if(firstbotCardValue <= 21)
+			{
+				dealerWin = true;
+			}
+			if(firstbotCardValue >= 22)
+			{
+				userWin = true;
+			}
+				
+		}
+		if(firstbotCardValue == userCardValue)
+		{
+			if(userCardValue <= 21)
+			{
+			art.setColor(Color.yellow);
+			art.drawString("It's a tie! restarting", 400, 430);
+			}
+			else
+			{
+				dealerWin = true;
+			}
+		}
+		
+	}
+		
+		
+	//updates the score each round after 199 milliseconds
+	public void score(Graphics art)
+	{
+		if(userWin)
+		{
+			//userWin = false;
+			art.setColor(Color.white);
+			art.drawString("You Win!", 280, 320);
+			if(timer == 199)
+			{
+				userRoundPoints ++;
+
+				//reset(art);
+			}
+		}
+		else
+		{
+			if(dealerWin)
+			{
+
+				art.setColor(Color.white);
+				art.drawString("Dealer Wins!", 280, 320);
+				if(timer == 199)
+				{
+					botRoundPoints ++;
+					//dealerWin = false;
+					//reset(art);
+				}
+			}
+			else
+			{
+				if(tie)
+				{
+					art.setColor(Color.white);
+					art.drawString("It's a tie! Restarting", 250, 320);
+					//	reset(art);
+				}
+			}
+		}
+	}
+	//this method resets all of the boolean methods so the game can restart completely
+	public void replayGame(Graphics art)
+	{
+		if(replayGame)
+		{
+			timer = 0;
+			buttonValue = 0;
+			cardValue1 = 0;
+			cardValue2 = 0;
+			cardValue3 = 0;
+			cardValue4 = 0;
+			cardValue5 = 0;
+			cardValue6 = 0;
+			cardValue7 = 0;
+			cardValue8 = 0;
+			userRoundPoints = 0;
+			botRoundPoints = 0;
+			cardValueUsers = false;
+			stay = false;
+			position1 = false;
+			position2 = false;
+			position8 = false;
+			position1 = true;
+			position2 = true;
+			position3 = false;
+			position4 = false;
+			position5 = false;
+			position6 = false;
+			position7 = false;
+			position8 = true;
+			AceOfHearts = false;
+			TwoOfHearts = false;
+			ThreeOfHearts = false;
+			FourOfHearts = false;
+			FiveOfHearts = false;
+			SixOfHearts = false;
+			SevenOfHearts = false;
+			EightOfHearts = false;
+			NineOfHearts = false;
+			TenOfHearts = false;
+			JackOfHearts = false;
+			QueenOfHearts = false;
+			KingOfHearts = false;
+			AceOfDiamonds = false;
+			TwoOfDiamonds = false;
+			ThreeOfDiamonds = false;
+			FourOfDiamonds = false;
+			FiveOfDiamonds = false;
+			SixOfDiamonds = false;
+			SevenOfDiamonds = false;
+			EightOfDiamonds = false;
+			NineOfDiamonds = false;
+			TenOfDiamonds = false;
+			JackOfDiamonds = false;
+			QueenOfDiamonds = false;
+			KingOfDiamonds = false;
+			AceOfClubs = false;
+			TwoOfClubs = false;
+			ThreeOfClubs = false;
+			FourOfClubs = false;
+			FiveOfClubs = false;
+			SixOfClubs = false;
+			SevenOfClubs = false;
+			EightOfClubs = false;
+			NineOfClubs = false;
+			TenOfClubs = false;
+			JackOfClubs = false;
+			QueenOfClubs = false;
+			KingOfClubs = false;
+			AceOfSpades = false;
+			TwoOfSpades = false;
+			ThreeOfSpades = false;
+			FourOfSpades = false;
+			FiveOfSpades = false;
+			SixOfSpades = false;
+			SevenOfSpades = false;
+			EightOfSpades = false;
+			NineOfSpades = false;
+			TenOfSpades = false;
+			JackOfSpades = false;
+			QueenOfSpades = false;
+			KingOfSpades = false;
+			showstartscreen = true;
+			playgame = false;
+			showendscreen = false;
+			ace11 = false;
+			userWin = false;
+			dealerWin = false;
+			tie = false;
+			back = true;
+			firstStay = true;
+			dealerHit = true;
+			playAgain = false;
+			replayGame = false;
+		}
+	}
+	//this method resets certain boolean methods so that the round can restart and keep the scores
+	public void reset(Graphics art)
+	{
+
+		dealerHit = true;
+		cardValueUsers = false;
+		stay = false;
+		position1 = false;
+		position2 = false;
+		position3 = false;
+		position4 = false;
+		position5 = false;
+		position6 = false;
+		position7 = false;
+		position8 = false;
+		AceOfHearts = false;
+		TwoOfHearts = false;
+		ThreeOfHearts = false;
+		FourOfHearts = false;
+		FiveOfHearts = false;
+		SixOfHearts = false;
+		SevenOfHearts = false;
+		EightOfHearts = false;
+		NineOfHearts = false;
+		TenOfHearts = false;
+		JackOfHearts = false;
+		QueenOfHearts = false;
+		KingOfHearts = false;
+		AceOfDiamonds = false;
+		TwoOfDiamonds = false;
+		ThreeOfDiamonds = false;
+		FourOfDiamonds = false;
+		FiveOfDiamonds = false;
+		SixOfDiamonds = false;
+		SevenOfDiamonds = false;
+		EightOfDiamonds = false;
+		NineOfDiamonds = false;
+		TenOfDiamonds = false;
+		JackOfDiamonds = false;
+		QueenOfDiamonds = false;
+		KingOfDiamonds = false;
+		AceOfClubs = false;
+		TwoOfClubs = false;
+		ThreeOfClubs = false;
+		FourOfClubs = false;
+		FiveOfClubs = false;
+		SixOfClubs = false;
+		SevenOfClubs = false;
+		EightOfClubs = false;
+		NineOfClubs = false;
+		TenOfClubs = false;
+		JackOfClubs = false;
+		QueenOfClubs = false;
+		KingOfClubs = false;
+		AceOfSpades = false;
+		TwoOfSpades = false;
+		ThreeOfSpades = false;
+		FourOfSpades = false;
+		FiveOfSpades = false;
+		SixOfSpades = false;
+		SevenOfSpades = false;
+		EightOfSpades = false;
+		NineOfSpades = false;
+		TenOfSpades = false;
+		JackOfSpades = false;
+		QueenOfSpades = false;
+		KingOfSpades = false;
+		showstartscreen = false;
+		playgame = false;
+		showendscreen = false;
+		ace11 = false;
+		userWin = false;
+		dealerWin = false;
+		tie = false;
+		back = true;
+		firstStay = true;
+		buttonValue = 0;
+		timer = 0;
+		cardValue1 = 0;
+		cardValue2 = 0;
+		cardValue3 = 0;
+		cardValue4 = 0;
+		cardValue5 = 0;
+		cardValue6 = 0;
+		cardValue7 = 0;
+		cardValue8 = 0;
+		position1 = true;
+		position2 = true;
+		position8 = true;
+		randomSuit3 = 0;
+		randomCard3 = 0;
+		randomSuit6 = 0;
+		randomCard6 = 0;
+		randomCard5 = 0;
+		randomSuit5 = 0;
+		randomCard4 = 0;
+		randomSuit4 = 0;
+		firstbotCardValue = 0;
+		userCardValue = 0;
+		botCardValue = 0;
+		while(botRoundPoints < 5 || userRoundPoints < 5)
+		{
+			reset(art);
+		}
+
+	}
+
+
+
+	//this method draws the start screen and displays the directions
+	public void drawstartscreen(Graphics art) //draws start screen
+	{
+		Color feltGreen = new Color(39, 119, 20);
+		setBackground(feltGreen);
+		art.setColor(Color.white);
+		art.drawString("Welcome to Black Jack", 280, 50);
+		art.drawString("The Rules are Simple", 280, 100);
+		art.drawString("The goal is to add your cards together to get as close to 21 as possible, without going over", 60, 150);
+		art.drawString("Face cards are have a value of 10", 250, 200);
+		art.drawString("Ace is worth 1 or 11, you decide", 250, 250);
+		art.drawString("Click the HIT button if you want another card or click the STAY button if you want to stay", 70, 300);
+		art.drawString("The dealer will always hit if his cards equal a value lower than 17 and will stay if they aren't", 70, 350);
+		art.drawString("If both players go over 21, the dealer wins", 220, 400);
+		art.drawString("The first one to win 5 rounds wins the game", 210, 450);
+		art.drawString("You must click stay when you are ready to complete the round", 160, 500);
+		art.drawString("Good Luck", 310, 550);
+		art.setColor(Color.yellow);
+		art.drawString("Please press enter to begin", 265, 600);
+	}
+	//this is for importing images, key listener, and mouse listener
+	public void init()
+	{
+		backOfCard = getImage(getCodeBase(), "BackOfCard.jpg");
+		aceOfHearts = getImage(getCodeBase(), "AceOfHearts.jpg"); 
+		twoOfHearts = getImage(getCodeBase(), "TwoOfHearts.jpg"); 
+		threeOfHearts = getImage(getCodeBase(), "ThreeOfHearts.jpg"); 
+		fourOfHearts = getImage(getCodeBase(), "FourOfHearts.jpg"); 
+		fiveOfHearts = getImage(getCodeBase(), "FiveOfHearts.jpg"); 
+		sixOfHearts = getImage(getCodeBase(), "SixOfHearts.jpg");
+		sevenOfHearts = getImage(getCodeBase(), "SevenOfHearts.jpg"); 
+		eightOfHearts = getImage(getCodeBase(), "EightOfHearts.jpg"); 
+		nineOfHearts = getImage(getCodeBase(), "NineOfHearts.jpg"); 
+		tenOfHearts = getImage(getCodeBase(), "TenOfHearts.jpg"); 
+		jackOfHearts = getImage(getCodeBase(), "JackOfHearts.jpg"); 
+		queenOfHearts = getImage(getCodeBase(), "QueenOfHearts.jpg"); 
+		kingOfHearts = getImage(getCodeBase(), "KingOfHearts.jpg"); 
+		aceOfDiamonds = getImage(getCodeBase(), "AceOfDiamonds.jpg"); 
+		twoOfDiamonds = getImage(getCodeBase(), "TwoOfDiamonds.jpg"); 
+		threeOfDiamonds = getImage(getCodeBase(), "ThreeOfDiamonds.jpg"); 
+		fourOfDiamonds = getImage(getCodeBase(), "FourOfDiamonds.jpg"); 
+		fiveOfDiamonds = getImage(getCodeBase(), "FiveOfDiamonds.jpg"); 
+		sixOfDiamonds = getImage(getCodeBase(), "SixOfDiamonds.jpg"); 
+		sevenOfDiamonds = getImage(getCodeBase(), "SevenOfDiamonds.jpg"); 
+		eightOfDiamonds = getImage(getCodeBase(), "EightOfDiamonds.jpg"); 
+		nineOfDiamonds = getImage(getCodeBase(), "NineOfDiamonds.jpg"); 
+		tenOfDiamonds = getImage(getCodeBase(), "TenOfDiamonds.jpg");
+		jackOfDiamonds = getImage(getCodeBase(), "JackOfDiamonds.jpg"); 
+		queenOfDiamonds = getImage(getCodeBase(), "QueenOfDiamonds.jpg"); 
+		kingOfDiamonds = getImage(getCodeBase(), "KingOfDiamonds.jpg"); 
+		aceOfClubs = getImage(getCodeBase(), "AceOfClubs.jpg");
+		twoOfClubs = getImage(getCodeBase(), "TwoOfClubs.jpg");
+		threeOfClubs = getImage(getCodeBase(), "ThreeOfClubs.jpg");
+		fourOfClubs = getImage(getCodeBase(), "FourOfClubs.jpg");
+		fiveOfClubs = getImage(getCodeBase(), "FiveOfClubs.jpg");
+		sixOfClubs = getImage(getCodeBase(), "SixOfClubs.jpg");
+		sevenOfClubs = getImage(getCodeBase(), "SevenOfClubs.jpg");
+		eightOfClubs = getImage(getCodeBase(), "EightOfClubs.jpg");
+		nineOfClubs = getImage(getCodeBase(), "NineOfClubs.jpg");
+		tenOfClubs = getImage(getCodeBase(), "TenOfClubs.jpg");
+		jackOfClubs = getImage(getCodeBase(), "JackOfClubs.jpg");
+		queenOfClubs = getImage(getCodeBase(), "QueenOfClubs.jpg");
+		kingOfClubs = getImage(getCodeBase(), "KingOfClubs.jpg");
+		aceOfSpades = getImage(getCodeBase(), "AceOfSpades.jpg");
+		twoOfSpades = getImage(getCodeBase(), "TwoOfSpades.jpg");
+		threeOfSpades = getImage(getCodeBase(), "ThreeOfSpades.jpg");
+		fourOfSpades = getImage(getCodeBase(), "FourOfSpades.jpg");
+		fiveOfSpades = getImage(getCodeBase(), "FiveOfSpades.jpg");
+		sixOfSpades = getImage(getCodeBase(), "SixOfSpades.jpg");
+		sevenOfSpades = getImage(getCodeBase(), "SevenOfSpades.jpg");
+		eightOfSpades = getImage(getCodeBase(), "EightOfSpades.jpg");
+		nineOfSpades = getImage(getCodeBase(), "NineOfSpades.jpg");
+		tenOfSpades = getImage(getCodeBase(), "TenOfSpades.jpg");
+		jackOfSpades = getImage(getCodeBase(), "JackOfSpades.jpg");
+		queenOfSpades = getImage(getCodeBase(), "QueenOfSpades.jpg");
+		kingOfSpades = getImage(getCodeBase(), "KingOfSpades.jpg");
+		addKeyListener(this);
+		addMouseListener(this);
+		addMouseMotionListener(this);
+	}
+	@Override
+	public void mouseClicked(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
+		int mouseXpos = e.getX();
+		int mouseYpos = e.getY();
+		if(mouseXpos > 0 && mouseYpos > 0)
+		{
+			//System.out.println("WORK PLEASE");
+		}
+		//if the user clicks the hit button, an extra card will be given. this can happen a total of two times
+		if(mouseXpos > 100 && mouseXpos < 300 && mouseYpos > 300 && mouseYpos < 400)
+		{
+			buttonValue ++;
+			System.out.println("test");
+			if(buttonValue == 1)
+			{
+
+				position3 = true;
+			}
+			if(buttonValue == 2)
+			{
+				position4 = true;
+
+			}
+
+		}
+		//if the user clicks the stay button, then the method for if the user clicks true starts
+		if(mouseXpos > 400 && mouseXpos < 600 && mouseYpos > 300 && mouseYpos < 400)
+		{
+			if(!position7)
+				stay = true;
+		}
+		//if the user clicks the play again button in the end screen then the entire game restarts
+		if(playAgain)
+		{
+			if(mouseXpos > 290 && mouseXpos < 440 && mouseYpos > 480 && mouseYpos < 530)
+			{
+				userRoundPoints = 0;
+				botRoundPoints = 0;
+				replayGame = true;
+				showstartscreen = true;
+				playAgain = false;
+			
+				
+			}
+		}
+	}
+
+
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e)
+	{
+		// TODO Auto-generated method stub
+		int key = e.getKeyCode();
+		//if the user presses enter in the start screen, then the game starts
+		if(key == e.VK_ENTER)
+		{
+			showstartscreen = false;
+			playGame = true;
+			
+		}
+		//if the user draws an ace, he/she will be given the option of pressing q to make the value 11
+		if(key == e.VK_Q)
+		{
+			ace11 = true;
+
+		}
+		
+
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+}
